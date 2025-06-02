@@ -1,52 +1,14 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const CalculatorIMC());
-}
-
-class CalculatorIMC extends StatelessWidget {
-  const CalculatorIMC({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Calculadora IMC',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-          primary: Colors.deepPurple,
-          secondary: Colors.amber,
-        ),
-        inputDecorationTheme: InputDecorationTheme(
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.deepPurple,
-            foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-        ),
-      ),
-      home: const MyHomePage(title: 'Calculadora IMC'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class CalculatorPage extends StatefulWidget {
   final String title;
+  const CalculatorPage({super.key, required this.title});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<CalculatorPage> createState() => _CalculatorPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _CalculatorPageState extends State<CalculatorPage> {
   final TextEditingController _alturaController = TextEditingController();
   final TextEditingController _massaController = TextEditingController();
   String? _resultado;
@@ -62,7 +24,6 @@ class _MyHomePageState extends State<MyHomePage> {
       return;
     }
     final imc = massa / (altura * altura);
-    const int icon = 0;
     String categoria =
         imc < 16
             ? 'Magreza Grave'
@@ -83,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _resultado =
           'Seu IMMC é ${imc.toStringAsFixed(2)}, está na categoria: $categoria';
+      this.categoria = categoria;
     });
   }
 
@@ -91,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
     _massaController.clear();
     setState(() {
       _resultado = null;
+      categoria = '';
     });
   }
 
