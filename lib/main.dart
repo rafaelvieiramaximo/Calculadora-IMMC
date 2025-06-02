@@ -63,11 +63,11 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     final imc = massa / (altura * altura);
     String categoria =
-        imc < 18.5
-            ? 'Abaixo do peso'
-            : imc < 24.9
-            ? 'Peso normal'
-            : imc < 29.9
+        imc < 16
+            ? 'Magreza Grave'
+            : imc >= 16 && imc < 16.9
+            ? 'Magreza Moderada'
+            : imc >= 17 && imc < 18.5
             ? 'Sobrepeso'
             : imc < 34.9
             ? 'Obesidade grau 1'
