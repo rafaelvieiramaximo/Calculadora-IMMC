@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const CalculatorIMMC());
+  runApp(const CalculatorIMC());
 }
 
-class CalculatorIMMC extends StatelessWidget {
-  const CalculatorIMMC({super.key});
+class CalculatorIMC extends StatelessWidget {
+  const CalculatorIMC({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Calculadora IMMC',
+      title: 'Calculadora IMC',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -18,7 +18,6 @@ class CalculatorIMMC extends StatelessWidget {
           primary: Colors.deepPurple,
           secondary: Colors.amber,
         ),
-        scaffoldBackgroundColor: Colors.deepPurple[50],
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: Colors.white,
@@ -34,7 +33,7 @@ class CalculatorIMMC extends StatelessWidget {
           ),
         ),
       ),
-      home: const MyHomePage(title: 'Calculadora IMMC'),
+      home: const MyHomePage(title: 'Calculadora IMC'),
     );
   }
 }
@@ -52,12 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _massaController = TextEditingController();
   String? _resultado;
 
-  void _calcularIMMC() {
+  void _calcularIMC() {
     final altura = double.tryParse(_alturaController.text.replaceAll(',', '.'));
     final massa = double.tryParse(_massaController.text.replaceAll(',', '.'));
-    if (altura == null || massa == null || altura <= 0) {
+    if (altura == null || massa == null || altura <= 0 || massa <= 0) {
       setState(() {
-        _resultado = 'Preencha os campos corretamente!';
+        _resultado = 'Por favor, insira valores válidos para altura e massa.';
       });
       return;
     }
@@ -68,15 +67,28 @@ class _MyHomePageState extends State<MyHomePage> {
             : imc >= 16 && imc < 16.9
             ? 'Magreza Moderada'
             : imc >= 17 && imc < 18.5
+            ? 'Magreza Leve'
+            : imc >= 18.6 && imc < 24.9
+            ? 'Peso Ideal'
+            : imc >= 25 && imc < 29.9
             ? 'Sobrepeso'
-            : imc < 34.9
-            ? 'Obesidade grau 1'
-            : imc < 39.9
-            ? 'Obesidade grau 2'
-            : 'Obesidade grau 3';
+            : imc >= 30 && imc < 34.9
+            ? 'Obesidade Grau I'
+            : imc >= 35 && imc < 39.9
+            ? 'Obesidade Grau II (severa)'
+            : 'Obesidade Grau III (mórbida)';
 
     setState(() {
-      _resultado = 'Seu IMMC está na categoria: $categoria';
+      _resultado =
+          'Seu IMMC é ${imc.toStringAsFixed(2)}, está na categoria: $categoria';
+    });
+  }
+
+  void _limparCampos() {
+    _alturaController.clear();
+    _massaController.clear();
+    setState(() {
+      _resultado = null;
     });
   }
 
@@ -100,8 +112,22 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 24),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.restart_alt_outlined,
+                        size: 40,
+                        color: Colors.deepPurple,
+                      ),
+                      onPressed: _limparCampos,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
                 const Icon(
                   Icons.calculate_rounded,
                   size: 80,
@@ -129,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: _calcularIMMC,
+                    onPressed: _calcularIMC,
                     child: const Text('Calcular IMMC'),
                   ),
                 ),
@@ -144,17 +170,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                ] else
+                ] else ...[
                   const SizedBox(height: 24),
-                Text(
-                  "Informe os dados!!",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+                  Text(
+                    "Informe os dados!!",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
+                ],
               ],
             ),
           ),
