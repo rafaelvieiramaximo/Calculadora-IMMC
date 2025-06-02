@@ -11,6 +11,7 @@ class CalculatorIMMC extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Calculadora IMMC',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.deepPurple,
@@ -61,8 +62,21 @@ class _MyHomePageState extends State<MyHomePage> {
       return;
     }
     final imc = massa / (altura * altura);
+    String categoria =
+        imc < 18.5
+            ? 'Abaixo do peso'
+            : imc < 24.9
+            ? 'Peso normal'
+            : imc < 29.9
+            ? 'Sobrepeso'
+            : imc < 34.9
+            ? 'Obesidade grau 1'
+            : imc < 39.9
+            ? 'Obesidade grau 2'
+            : 'Obesidade grau 3';
+
     setState(() {
-      _resultado = 'Seu IMMC é: ${imc.toStringAsFixed(2)}';
+      _resultado = 'Seu IMMC está na categoria: $categoria';
     });
   }
 
@@ -130,7 +144,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                ],
+                ] else
+                  const SizedBox(height: 24),
+                Text(
+                  "Informe os dados!!",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),
