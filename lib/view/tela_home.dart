@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final now = DateTime.now();
     setState(() {
       _timeString = DateFormat('HH:mm:ss').format(now);
-      _dateString = DateFormat('dd/MM/yyyy').format(now);
+      _dateString = DateFormat('dd / MM / yyyy').format(now);
     });
   }
 
@@ -47,13 +47,17 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset("assets/images/Home.png", fit: BoxFit.cover),
+          Image.asset(
+            "assets/images/Home.jpg",
+            fit: BoxFit.cover,
+            gaplessPlayback: true,
+          ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(_timeString, style: AppTextStyles.clockText),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 Text(
                   _dateString,
                   style: AppTextStyles.clockText.copyWith(fontSize: 24),
@@ -62,9 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-            top: 40,
             left: 0,
             right: 0,
+            bottom: 100,
             child: Center(
               child: SizedBox(
                 height: 45,
