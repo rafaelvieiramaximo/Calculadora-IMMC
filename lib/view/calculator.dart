@@ -46,6 +46,9 @@ class _CalculatorPageState extends State<CalculatorPage> {
           'Seu IMMC é ${imc.toStringAsFixed(2)}, está na categoria: $categoria';
       this.categoria = categoria;
     });
+
+    _alturaController.clear();
+    _massaController.clear();
   }
 
   Icon _icones(String? categoria) {
@@ -127,7 +130,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         ),
         elevation: 0,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
         child: Column(
           children: [
@@ -150,7 +153,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
               size: 80,
               color: Colors.deepPurple,
             ),
-            const SizedBox(height: 100),
+            const SizedBox(height: 80),
             TextField(
               controller: _alturaController,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
