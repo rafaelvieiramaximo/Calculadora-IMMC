@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
@@ -13,36 +14,31 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late String _timeString;
   late String _dateString;
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    _timeString = _formatTime(DateTime.now());
-    _dateString = _formatDate(DateTime.now());
-    Future.delayed(Duration.zero, () {
-      setState(() {});
-    });
-    _startClock();
-  }
-
-  void _startClock() {
-    Future.delayed(const Duration(seconds: 1), () {
+    _updateDateTime();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (mounted) {
-        setState(() {
-          _timeString = _formatTime(DateTime.now());
-          _dateString = _formatDate(DateTime.now());
-        });
-        _startClock();
+        _updateDateTime();
       }
     });
   }
 
-  String _formatTime(DateTime dateTime) {
-    return DateFormat('HH:mm:ss').format(dateTime);
+  void _updateDateTime() {
+    final now = DateTime.now();
+    setState(() {
+      _timeString = DateFormat('HH:mm:ss').format(now);
+      _dateString = DateFormat('dd/MM/yyyy').format(now);
+    });
   }
 
-  String _formatDate(DateTime dateTime) {
-    return DateFormat('dd/MM/yyyy').format(dateTime);
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -72,15 +68,34 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Center(
               child: SizedBox(
                 height: 45,
-                width: 180,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.mediumAqua,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed('/second');
-                  },
-                  child: Text('Segunda Tela', style: AppTextStyles.buttonText),
+                width: 380,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColor.mediumAqua,
+                        minimumSize: const Size(160, 45),
+                      ),
+                      onPressed: () {
+                        // Substitua pela rota da tela de login
+                        Navigator.of(context).pushNamed('/login');
+                      },
+                      child: Text('Entrar', style: AppTextStyles.buttonText),
+                    ),
+                    const SizedBox(width: 20),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColor.mediumAqua,
+                        minimumSize: const Size(160, 45),
+                      ),
+                      onPressed: () {
+                        // Substitua pela rota da tela de cadastro
+                        Navigator.of(context).pushNamed('/cadastro');
+                      },
+                      child: Text('Cadastrar', style: AppTextStyles.buttonText),
+                    ),
+                  ],
                 ),
               ),
             ),
