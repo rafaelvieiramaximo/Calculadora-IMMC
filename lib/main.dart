@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:calculadora_immc/view/calculator.dart';
+import 'package:calculadora_immc/style/style.dart';
 
 void main() {
   runApp(const CalculatorIMC());
@@ -15,19 +16,18 @@ class CalculatorIMC extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-          primary: Colors.deepPurple,
-          secondary: Colors.amber,
+          seedColor: AppColor.main,
+          primary: AppColor.main,
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: Colors.white,
+          fillColor: AppColor.bginput,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.deepPurple,
-            foregroundColor: Colors.white,
+            backgroundColor: AppColor.main,
+            foregroundColor: AppColor.bginput,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
