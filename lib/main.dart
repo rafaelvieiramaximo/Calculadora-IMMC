@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:calculadora_immc/view/calculator.dart';
+import 'package:calculadora_immc/view/tela_home.dart';
 import 'package:calculadora_immc/style/style.dart';
 
 void main() {
@@ -34,7 +34,7 @@ class CalculatorIMC extends StatelessWidget {
           ),
         ),
       ),
-      home: const CalculatorPage(title: 'Calculadora IMC'),
+      home: const HomeScreen(),
     );
   }
 }
