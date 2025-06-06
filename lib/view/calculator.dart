@@ -30,6 +30,10 @@ class _CalculatorPageState extends State<CalculatorPage> {
     });
   }
 
+  void logout(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -216,6 +220,11 @@ class _CalculatorPageState extends State<CalculatorPage> {
                   textAlign: TextAlign.center,
                 ),
               ],
+              const SizedBox(height: 70),
+              ElevatedButton(
+                onPressed: () => logout(context),
+                child: const Text('Logout'),
+              ),
             ],
           ),
         ),
