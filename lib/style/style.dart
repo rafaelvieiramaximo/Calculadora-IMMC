@@ -30,4 +30,11 @@ class AppTextStyles {
     fontFamily: 'Nunito',
     color: AppColor.main,
   );
+
+  static const titler = TextStyle(
+    fontSize: 28,
+    fontWeight: FontWeight.w800,
+    fontFamily: 'Nunito',
+    color: AppColor.main,
+  );
 }

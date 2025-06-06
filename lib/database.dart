@@ -29,11 +29,18 @@ class DataBaseHelper {
     );
   }
 
-  Future<void> insertsUser(String email, String password) async {
+  Future<void> insertUser(
+    String email,
+    String password,
+    String name,
+    String lastname,
+  ) async {
     final db = await database;
     await db.insert('users', {
       'email': email,
       'password': password,
+      'name': name,
+      'lastname': lastname,
     }, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
