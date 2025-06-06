@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:calculadora_immc/style/style.dart';
+import 'package:calculadora_immc/controller/control_calc.dart';
 
 class CalculatorPage extends StatefulWidget {
   final String title;
@@ -9,206 +11,118 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
-  final TextEditingController _alturaController = TextEditingController();
-  final TextEditingController _massaController = TextEditingController();
-  String? _resultado;
-  String? categoria = '';
-
-  void _calcularIMC() {
-    final altura = double.tryParse(_alturaController.text.replaceAll(',', '.'));
-    final massa = double.tryParse(_massaController.text.replaceAll(',', '.'));
-    if (altura == null || massa == null || altura <= 0 || massa <= 0) {
-      setState(() {
-        _resultado = 'Por favor, insira valores válidos para altura e massa.';
-      });
-      return;
-    }
-    final imc = massa / (altura * altura);
-    String categoria =
-        imc < 16
-            ? 'Magreza Grave'
-            : imc >= 16 && imc < 16.9
-            ? 'Magreza Moderada'
-            : imc >= 17 && imc < 18.5
-            ? 'Magreza Leve'
-            : imc >= 18.6 && imc < 24.9
-            ? 'Peso Ideal'
-            : imc >= 25 && imc < 29.9
-            ? 'Sobrepeso'
-            : imc >= 30 && imc < 34.9
-            ? 'Obesidade Grau I'
-            : imc >= 35 && imc < 39.9
-            ? 'Obesidade Grau II (severa)'
-            : 'Obesidade Grau III (mórbida)';
-
-    setState(() {
-      _resultado =
-          'Seu IMMC é ${imc.toStringAsFixed(2)}, está na categoria: $categoria';
-      this.categoria = categoria;
-    });
-
-    _alturaController.clear();
-    _massaController.clear();
-  }
-
-  Icon _icones(String? categoria) {
-    switch (categoria) {
-      case 'Magreza Grave':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.red,
-        );
-      case 'Magreza Moderada':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.orange,
-        );
-      case 'Magreza Leve':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.yellow,
-        );
-      case 'Peso Ideal':
-        return const Icon(
-          Icons.check_circle_outline,
-          size: 60,
-          color: Colors.green,
-        );
-      case 'Sobrepeso':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.orange,
-        );
-      case 'Obesidade Grau I':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.red,
-        );
-      case 'Obesidade Grau II (severa)':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.red,
-        );
-      case 'Obesidade Grau III (mórbida)':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.red,
-        );
-      default:
-        return const Icon(Icons.help_outline, size: 40, color: Colors.grey);
-    }
-  }
-
-  void _limparCampos() {
-    _alturaController.clear();
-    _massaController.clear();
-    setState(() {
-      _resultado = null;
-      categoria = '';
-    });
-  }
+  final CalculatorController _controller = CalculatorController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        centerTitle: true,
-        title: Text(
-          widget.title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('ShapeTrack'),
+          backgroundColor: AppColor.appBar,
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Image.asset(
+                'assets/images/logo.png',
+                fit: BoxFit.contain,
+                height: 48,
+              ),
+            ),
           ),
         ),
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  icon: const Icon(
-                    Icons.restart_alt_outlined,
-                    size: 40,
-                    color: Colors.deepPurple,
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+          child: Column(
+            children: [
+              Text(
+                'Seja ',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: AppColor.main,
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.restart_alt_outlined,
+                      size: 40,
+                      color: Colors.deepPurple,
+                    ),
+                    onPressed:
+                        () => _controller.limparCampos(() => setState(() {})),
                   ),
-                  onPressed: _limparCampos,
+                ],
+              ),
+              const SizedBox(height: 30),
+              const Icon(
+                Icons.calculate_rounded,
+                size: 80,
+                color: Colors.deepPurple,
+              ),
+              const SizedBox(height: 80),
+              TextField(
+                controller: _controller.alturaController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                decoration: const InputDecoration(
+                  labelText: 'Altura (m)',
+                  prefixIcon: Icon(Icons.height),
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: _controller.massaController,
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                decoration: const InputDecoration(
+                  labelText: 'Massa (kg)',
+                  prefixIcon: Icon(Icons.monitor_weight),
+                ),
+              ),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed:
+                      () => _controller.calcularIMC(() => setState(() {})),
+                  child: const Text('Calcular IMC'),
+                ),
+              ),
+              if (_controller.resultado != null) ...[
+                const SizedBox(height: 24),
+                Text(
+                  _controller.resultado!,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ] else ...[
+                const SizedBox(height: 24),
+                Text(
+                  "Informe os dados!!",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
               ],
-            ),
-            const SizedBox(height: 30),
-            const Icon(
-              Icons.calculate_rounded,
-              size: 80,
-              color: Colors.deepPurple,
-            ),
-            const SizedBox(height: 80),
-            TextField(
-              controller: _alturaController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              decoration: const InputDecoration(
-                labelText: 'Altura (m)',
-                prefixIcon: Icon(Icons.height),
-              ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: _massaController,
-              keyboardType: TextInputType.numberWithOptions(decimal: true),
-              decoration: const InputDecoration(
-                labelText: 'Massa (kg)',
-                prefixIcon: Icon(Icons.monitor_weight),
-              ),
-            ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _calcularIMC,
-                child: const Text('Calcular IMC'),
-              ),
-            ),
-            if (_resultado != null) ...[
-              const SizedBox(height: 24),
-              Text(
-                _resultado!,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ] else ...[
-              const SizedBox(height: 24),
-              Text(
-                "Informe os dados!!",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                textAlign: TextAlign.center,
-              ),
+              const SizedBox(height: 30),
+              if (_controller.resultado != null &&
+                  _controller.categoria != null &&
+                  _controller.categoria!.isNotEmpty) ...[
+                _controller.icones(_controller.categoria),
+              ],
             ],
-            const SizedBox(height: 30),
-            if (_resultado != null &&
-                categoria != null &&
-                categoria!.isNotEmpty) ...[
-              _icones(categoria),
-            ],
-          ],
+          ),
         ),
       ),
     );

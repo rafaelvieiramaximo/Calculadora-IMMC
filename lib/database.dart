@@ -18,14 +18,16 @@ class DataBaseHelper {
   }
 
   Future<Database> initDataBase() async {
+    final path = join(await getDatabasesPath(), 'user_database.db');
+
     return openDatabase(
-      join(await getDatabasesPath(), 'user_database.db'),
+      path,
       onCreate: (db, version) async {
         await db.execute(
-          'CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT)',
+          'CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT, password TEXT, name TEXT, lastname TEXT)',
         );
       },
-      version: 1, //Essa versão é importante para controle de migrações
+      version: 1,
     );
   }
 

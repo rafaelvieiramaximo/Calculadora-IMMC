@@ -61,7 +61,7 @@ class loginScreenState extends State<LoginScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('ShapeTrack'),
-          backgroundColor: AppColor.lightGray,
+          backgroundColor: AppColor.appBar,
           flexibleSpace: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Align(
@@ -113,9 +113,9 @@ class loginScreenState extends State<LoginScreen> {
                       } else if (value.length < 8) {
                         return 'A senha deve ter pelo menos 8 caracteres.';
                       } else if (!RegExp(
-                        r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]$',
+                        r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$',
                       ).hasMatch(value)) {
-                        return 'A senha deve conter uma letra e um número.';
+                        return 'A senha deve conter pelo menos uma letra, um número.';
                       }
                       return null;
                     },

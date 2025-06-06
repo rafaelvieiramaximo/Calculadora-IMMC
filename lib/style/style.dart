@@ -5,6 +5,7 @@ class AppColor {
   static const bginput = Colors.white;
   static const mediumAqua = Color(0xFFD39FE6);
   static const lightGray = Color(0xFFD3D3D3);
+  static const appBar = Color(0xFFD090FF);
   static const black = Colors.black;
   static const clock = Color(0xFF8E53E6);
 }

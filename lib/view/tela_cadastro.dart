@@ -53,11 +53,10 @@ class _CadastroScreenState extends State<CadastroScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        // evita overflow
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Form(
-            key: formKey, // chave adicionada aqui
+            key: formKey,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
