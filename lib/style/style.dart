@@ -8,6 +8,14 @@ class AppColor {
   static const appBar = Color(0xFFD090FF);
   static const black = Colors.black;
   static const clock = Color(0xFF8E53E6);
+  static const normal = Color(0xFF4AFF6B);
+  static const sobrepeso = Color(0xFFFCA044);
+  static const obeso1 = Color(0xFFFC5744);
+  static const obeso2 = Color(0xFFFC2C44);
+  static const obeso3 = Color(0xFFFC0000);
+  static const magro2 = Color(0xFF4444FC);
+  static const magro1 = Color(0xFF4488FC);
+  static const magro3 = Color(0xFF010CFF);
 }
 
 class AppTextStyles {

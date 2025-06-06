@@ -53,18 +53,17 @@ class _CalculatorPageState extends State<CalculatorPage> {
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
           child: Column(
             children: [
-              Text(
-                '${_controller.getTimeGreeting()} ${_userName ?? ''}',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: AppColor.main,
-                ),
-              ),
-              const SizedBox(height: 16),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Text(
+                    '${_controller.getTimeGreeting()} ${_userName ?? ''}',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.main,
+                    ),
+                  ),
                   IconButton(
                     icon: const Icon(
                       Icons.restart_alt_outlined,
@@ -76,6 +75,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                   ),
                 ],
               ),
+              const SizedBox(height: 16),
               const SizedBox(height: 30),
               const Icon(
                 Icons.calculate_rounded,
@@ -87,7 +87,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                 controller: _controller.alturaController,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 decoration: const InputDecoration(
-                  labelText: 'Altura (m)',
+                  labelText: 'Altura (cm)',
                   prefixIcon: Icon(Icons.height),
                 ),
               ),
@@ -111,15 +111,99 @@ class _CalculatorPageState extends State<CalculatorPage> {
               ),
               if (_controller.resultado != null) ...[
                 const SizedBox(height: 24),
-                Text(
-                  _controller.resultado!,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
+                if (_controller.categoria == 'Peso Ideal') ...[
+                  Text(
+                    _controller.resultado!,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.normal,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
+                ] else if (_controller.categoria == 'Sobrepeso') ...[
+                  Text(
+                    _controller.resultado!,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.sobrepeso,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ] else if (_controller.categoria == 'Obesidade Grau I') ...[
+                  Text(
+                    _controller.resultado!,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.obeso1,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ] else if (_controller.categoria ==
+                    'Obesidade Grau II (severa)') ...[
+                  Text(
+                    _controller.resultado!,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.obeso2,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ] else if (_controller.categoria ==
+                    'Obesidade Grau III (mórbida)') ...[
+                  Text(
+                    _controller.resultado!,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.obeso3,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ] else if (_controller.categoria == 'Magreza Leve') ...[
+                  Text(
+                    _controller.resultado!,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.magro1,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ] else if (_controller.categoria == 'Magreza Moderada') ...[
+                  Text(
+                    _controller.resultado!,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.magro2,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ] else if (_controller.categoria == 'Magreza Severa') ...[
+                  Text(
+                    _controller.resultado!,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColor.magro3,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ] else ...[
+                  Text(
+                    _controller.resultado!,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ] else ...[
                 const SizedBox(height: 24),
                 Text(
@@ -131,12 +215,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-              ],
-              const SizedBox(height: 30),
-              if (_controller.resultado != null &&
-                  _controller.categoria != null &&
-                  _controller.categoria!.isNotEmpty) ...[
-                _controller.icones(_controller.categoria),
               ],
             ],
           ),

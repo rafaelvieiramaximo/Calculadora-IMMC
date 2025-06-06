@@ -26,7 +26,8 @@ class CalculatorController {
       setStateCallback();
       return;
     }
-    final imc = massa / (altura * altura);
+    final alturaM = altura / 100;
+    final imc = massa / (alturaM * alturaM);
     categoria =
         imc < 16
             ? 'Magreza Grave'
@@ -50,61 +51,6 @@ class CalculatorController {
 
     alturaController.clear();
     massaController.clear();
-  }
-
-  Icon icones(String? categoria) {
-    switch (categoria) {
-      case 'Magreza Grave':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.red,
-        );
-      case 'Magreza Moderada':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.orange,
-        );
-      case 'Magreza Leve':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.yellow,
-        );
-      case 'Peso Ideal':
-        return const Icon(
-          Icons.check_circle_outline,
-          size: 60,
-          color: Colors.green,
-        );
-      case 'Sobrepeso':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.orange,
-        );
-      case 'Obesidade Grau I':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.red,
-        );
-      case 'Obesidade Grau II (severa)':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.red,
-        );
-      case 'Obesidade Grau III (mórbida)':
-        return const Icon(
-          Icons.warning_amber_outlined,
-          size: 60,
-          color: Colors.red,
-        );
-      default:
-        return const Icon(Icons.help_outline, size: 40, color: Colors.grey);
-    }
   }
 
   void limparCampos(VoidCallback setStateCallback) {
