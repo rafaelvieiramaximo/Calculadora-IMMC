@@ -32,7 +32,7 @@ class AppTextStyles {
   );
 
   static const titler = TextStyle(
-    fontSize: 28,
+    fontSize: 40,
     fontWeight: FontWeight.w800,
     fontFamily: 'Nunito',
     color: AppColor.main,
