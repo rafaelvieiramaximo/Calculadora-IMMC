@@ -26,11 +26,7 @@ class loginScreenState extends State<LoginScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder:
-                (context) => CalculatorPage(
-                  email: emailController.text,
-                  title: 'Calculadora IMC',
-                ),
+            builder: (context) => CalculatorPage(email: user['email']),
           ),
         );
       } else {

@@ -7,6 +7,17 @@ class CalculatorController {
   String? resultado;
   String? categoria = '';
 
+  String getTimeGreeting() {
+    final hour = DateTime.now().hour;
+    if (hour >= 5 && hour < 12) {
+      return 'Bom dia';
+    } else if (hour >= 12 && hour < 18) {
+      return 'Boa tarde';
+    } else {
+      return 'Boa noite';
+    }
+  }
+
   void calcularIMC(VoidCallback setStateCallback) {
     final altura = double.tryParse(alturaController.text.replaceAll(',', '.'));
     final massa = double.tryParse(massaController.text.replaceAll(',', '.'));

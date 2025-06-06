@@ -46,6 +46,11 @@ class DataBaseHelper {
     }, conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
+  Future<String> getName(String email) async {
+    final user = await getUser(email);
+    return user?['name'] ?? '';
+  }
+
   Future<Map<String, dynamic>?> getUser(String email) async {
     final db = await database;
     final List<Map<String, dynamic>> users = await db.query(

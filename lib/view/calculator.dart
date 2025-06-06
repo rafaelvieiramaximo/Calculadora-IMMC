@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:calculadora_immc/style/style.dart';
 import 'package:calculadora_immc/controller/control_calc.dart';
+import 'package:calculadora_immc/database.dart';
 
 class CalculatorPage extends StatefulWidget {
-  final String title;
-  const CalculatorPage({super.key, required this.title, required String email});
+  final String email;
+
+  const CalculatorPage({super.key, required this.email});
 
   @override
   State<CalculatorPage> createState() => _CalculatorPageState();
@@ -12,6 +14,21 @@ class CalculatorPage extends StatefulWidget {
 
 class _CalculatorPageState extends State<CalculatorPage> {
   final CalculatorController _controller = CalculatorController();
+  final DataBaseHelper _database = DataBaseHelper();
+  String? _userName;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserName();
+  }
+
+  Future<void> _loadUserName() async {
+    final name = await _database.getName(widget.email);
+    setState(() {
+      _userName = name;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +54,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           child: Column(
             children: [
               Text(
-                'Seja ',
+                '${_controller.getTimeGreeting()} ${_userName ?? ''}',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
