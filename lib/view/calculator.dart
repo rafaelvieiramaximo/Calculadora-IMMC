@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CalculatorPage extends StatefulWidget {
   final String title;
-  const CalculatorPage({super.key, required this.title});
+  const CalculatorPage({super.key, required this.title, required String email});
 
   @override
   State<CalculatorPage> createState() => _CalculatorPageState();

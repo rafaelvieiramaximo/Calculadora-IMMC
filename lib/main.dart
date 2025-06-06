@@ -1,6 +1,8 @@
+import 'package:calculadora_immc/view/tela_login.dart';
 import 'package:flutter/material.dart';
 import 'package:calculadora_immc/view/tela_home.dart';
 import 'package:calculadora_immc/style/style.dart';
+import 'package:calculadora_immc/view/tela_cadastro.dart';
 
 void main() {
   runApp(const CalculatorIMC());
@@ -35,6 +37,10 @@ class CalculatorIMC extends StatelessWidget {
         ),
       ),
       home: const HomeScreen(),
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/cadastro': (context) => const CadastroScreen(),
+      },
     );
   }
 }
