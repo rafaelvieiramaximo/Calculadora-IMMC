@@ -17,9 +17,9 @@ Este projeto é um aplicativo Flutter que calcula o IMC (Índice de Massa Corpor
 
 ## 📸 Capturas de Tela
 
-| Login | Cadastro | Tela Inicial |
-|-------|----------|--------------|
-| ![Login](assets/screenshots/login.png) | ![Cadastro](assets/screenshots/cadastro.png) | ![Home](assets/screenshots/home.png) |
+| Login | Cadastro | Tela Inicial | Calculadora |
+|-------|----------|--------------| ----------- |
+| ![Login](assets/screenshots/login.png) | ![Cadastro](assets/screenshots/cadastro.png) | ![Home](assets/screenshots/home.png) | ![Calculadora](assets/screenshots/calculadora.png) |
 
 > *Adicione suas imagens na pasta `assets/screenshots/` ou substitua os caminhos acima conforme necessário.*
 
