@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:calculadora_immc/style/style.dart';
-import 'package:calculadora_immc/controller/control_calc.dart';
+import 'package:calculadora_immc/modules/control_calc.dart';
 import 'package:calculadora_immc/database.dart';
 
 class CalculatorPage extends StatefulWidget {
