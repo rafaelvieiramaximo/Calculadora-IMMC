@@ -13,7 +13,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
-  final databaseHelper = DataBaseHelper();
+  final databaseHelper = DataBaseHelper.instance;
   final nameController = TextEditingController();
   final lastnameController = TextEditingController();
 
@@ -28,19 +28,22 @@ class _CadastroScreenState extends State<CadastroScreen> {
         );
         return;
       }
-
-      await databaseHelper.insertUser(
-        email,
-        passwordController.text.trim(),
-        nameController.text.trim(),
-        lastnameController.text.trim(),
-      );
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Usuário cadastrado com sucesso!')),
-      );
-
-      Navigator.of(context).pop();
+      try {
+        await DataBaseHelper.instance.insertUser(
+          email,
+          passwordController.text.trim(),
+          nameController.text.trim(),
+          lastnameController.text.trim(),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Usuário cadastrado com sucesso!')),
+        );
+        Navigator.of(context).pop();
+      } catch (e) {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Erro ao cadastrar: $e')));
+      }
     }
   }
 
@@ -51,8 +54,8 @@ class _CadastroScreenState extends State<CadastroScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+    return Material(
+      child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Form(
