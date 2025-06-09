@@ -55,85 +55,87 @@ class _CadastroScreenState extends State<CadastroScreen> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  constraints: const BoxConstraints(
-                    maxHeight: 140,
-                    maxWidth: 240,
-                  ),
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                const SizedBox(height: 40),
-                Text('Cadastro', style: AppTextStyles.titler),
-                const SizedBox(height: 30),
-                TextFormField(
-                  controller: emailController,
-                  decoration: const InputDecoration(labelText: 'Email'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor, insira seu email.';
-                    } else if (!RegExp(
-                      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-                    ).hasMatch(value)) {
-                      return 'Por favor, insira um email válido.';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: passwordController,
-                  decoration: const InputDecoration(labelText: 'Senha'),
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor, insira sua senha.';
-                    } else if (value.length < 8) {
-                      return 'A senha deve ter pelo menos 8 caracteres.';
-                    } else if (!RegExp(
-                      r'^(?=.*[A-Za-z])(?=.*\d).+$',
-                    ).hasMatch(value)) {
-                      return 'A senha deve conter uma letra e um número.';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: nameController,
-                  decoration: const InputDecoration(labelText: 'Nome'),
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: lastnameController,
-                  decoration: const InputDecoration(labelText: 'Sobrenome'),
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => Navigator.of(context).pop(),
-                      child: const Text('Cancelar'),
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Form(
+              key: formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    constraints: const BoxConstraints(
+                      maxHeight: 140,
+                      maxWidth: 240,
                     ),
-                    const SizedBox(width: 16),
-                    ElevatedButton(
-                      onPressed: register,
-                      child: const Text('Cadastrar'),
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      fit: BoxFit.contain,
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                  const SizedBox(height: 40),
+                  Text('Cadastro', style: AppTextStyles.titler),
+                  const SizedBox(height: 30),
+                  TextFormField(
+                    controller: emailController,
+                    decoration: const InputDecoration(labelText: 'Email'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor, insira seu email.';
+                      } else if (!RegExp(
+                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                      ).hasMatch(value)) {
+                        return 'Por favor, insira um email válido.';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: passwordController,
+                    decoration: const InputDecoration(labelText: 'Senha'),
+                    obscureText: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor, insira sua senha.';
+                      } else if (value.length < 8) {
+                        return 'A senha deve ter pelo menos 8 caracteres.';
+                      } else if (!RegExp(
+                        r'^(?=.*[A-Za-z])(?=.*\d).+$',
+                      ).hasMatch(value)) {
+                        return 'A senha deve conter uma letra e um número.';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: nameController,
+                    decoration: const InputDecoration(labelText: 'Nome'),
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: lastnameController,
+                    decoration: const InputDecoration(labelText: 'Sobrenome'),
+                  ),
+                  const SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text('Cancelar'),
+                      ),
+                      const SizedBox(width: 16),
+                      ElevatedButton(
+                        onPressed: register,
+                        child: const Text('Cadastrar'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:calculadora_immc/style/style.dart';
-import 'package:calculadora_immc/database.dart';
+// import 'package:calculadora_immc/database.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Positioned(
                 left: 0,
                 right: 0,
-                bottom: 100,
+                bottom: 200,
                 child: Center(
                   child: SizedBox(
                     height: 45,
@@ -136,27 +136,27 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            minimumSize: const Size(160, 45),
-                          ),
-                          onPressed: () async {
-                            await DataBaseHelper.instance.clearUsers();
-                            if (context.mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Banco de dados limpo!'),
-                                ),
-                              );
-                            }
-                          },
-                          child: const Text(
-                            'Limpar Banco',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
+                        // const SizedBox(width: 16),
+                        // ElevatedButton(
+                        //   style: ElevatedButton.styleFrom(
+                        //     backgroundColor: Colors.red,
+                        //     minimumSize: const Size(160, 45),
+                        //   ),
+                        //   onPressed: () async {
+                        //     await DataBaseHelper.instance.clearUsers();
+                        //     if (context.mounted) {
+                        //       ScaffoldMessenger.of(context).showSnackBar(
+                        //         const SnackBar(
+                        //           content: Text('Banco de dados limpo!'),
+                        //         ),
+                        //       );
+                        //     }
+                        //   },
+                        //   child: const Text(
+                        //     'Limpar Banco',
+                        //     style: TextStyle(color: Colors.white),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

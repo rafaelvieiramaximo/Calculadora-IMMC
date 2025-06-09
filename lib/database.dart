@@ -51,10 +51,10 @@ class DataBaseHelper {
     return user?['name'] ?? '';
   }
 
-  Future<void> clearUsers() async {
-    final db = await database;
-    await db.delete('users');
-  }
+  // Future<void> clearUsers() async {
+  //   final db = await database;
+  //   await db.delete('users');
+  // }
 
   Future<Map<String, dynamic>?> getUser(String email) async {
     final db = await database;
