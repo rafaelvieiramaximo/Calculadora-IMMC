@@ -1,17 +1,42 @@
-# calculadora_immc
+# 📱 Calculadora de IMC com Login e Cadastro
 
-A new Flutter project.
+Este projeto é um aplicativo Flutter que calcula o IMC (Índice de Massa Corporal) do usuário, permitindo que ele registre e consulte seus dados de forma personalizada. O app inclui uma tela de login e cadastro com persistência local usando SQLite.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🧩 Funcionalidades
 
-A few resources to get you started if this is your first Flutter project:
+- ✅ Tela de Login com verificação de credenciais
+- ✅ Tela de Cadastro com validação e armazenamento local
+- ✅ Cálculo de IMC com exibição do resultado
+- ✅ Armazenamento local de dados com SQLite
+- ✅ Exibição de data, hora e saudação dinâmica na tela inicial
+- ✅ Estrutura organizada com padrão MVC
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# Calculadora-IMMC
+## 📸 Capturas de Tela
+
+| Login | Cadastro | Tela Inicial |
+|-------|----------|--------------|
+| ![Login](assets/screenshots/login.png) | ![Cadastro](assets/screenshots/cadastro.png) | ![Home](assets/screenshots/home.png) |
+
+> *Adicione suas imagens na pasta `assets/screenshots/` ou substitua os caminhos acima conforme necessário.*
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- [Flutter](https://flutter.dev/)
+- [Dart](https://dart.dev/)
+- [SQLite (sqflite)](https://pub.dev/packages/sqflite)
+- [intl](https://pub.dev/packages/intl)
+
+---
+
+## 🚀 Como Rodar o Projeto
+
+### 1. Clone o repositório
+```bash
+git clone https://github.com/seu-usuario/nome-do-repo.git
+cd nome-do-repo
